@@ -1,27 +1,25 @@
 import { Component } from '@angular/core';
-
-enum Status {
-  NotStarted,
-  InProgress,
-  InReview,
-  Approved,
-}
+import { type Task, TASKS } from '../task';
+import { LowerCasePipe } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [],
+  imports: [LowerCasePipe, FormsModule],
   templateUrl: './tasks.component.html',
-  styleUrl: './tasks.component.scss'
+  styleUrl: './tasks.component.scss',
 })
 export class TasksComponent {
-  readonly name: string;
-  readonly due: Date;
-  readonly status: Status;
+  readonly tasks: Task[];
+  selected: number | null;
 
-  constructor(due: Date) {
-    this.name = "TODO";
-    this.due = due;
-    this.status = Status.NotStarted;
+  constructor() {
+    this.tasks = TASKS;
+    this.selected = null;
+  }
+
+  onSelect(index: number | null): void {
+    this.selected = index;
   }
 }

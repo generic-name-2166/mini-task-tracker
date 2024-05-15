@@ -1,3 +1,24 @@
-<article>
-  <p>{{ name }}</p>
-</article>
+<ul>
+  @for (task of tasks; track task) {
+    <li>
+      <article [class.selected]="$index === selected">
+        @if ($index !== selected) {
+          <p>{{ task.name | lowercase }}</p>
+        } @else {
+          <label for="name">Hero name: </label>
+          <input id="name" [(ngModel)]="task.name" placeholder="name" />
+        }
+
+        <p>{{ task.due }}</p>
+
+        <button
+          type="button"
+          (click)="onSelect($index)"
+          [disabled]="$index === selected"
+        >
+          Select
+        </button>
+      </article>
+    </li>
+  }
+</ul>
