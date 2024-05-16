@@ -1,7 +1,8 @@
-import { Component } from "@angular/core";
-import { type Task, TASKS } from "../task";
+import { Component, type OnInit, inject } from "@angular/core";
+import type { Task } from "../task";
 import { LowerCasePipe } from "@angular/common";
 import { FormsModule } from "@angular/forms";
+import { TaskService } from "../task.service";
 
 @Component({
   selector: "app-tasks",
@@ -10,13 +11,19 @@ import { FormsModule } from "@angular/forms";
   templateUrl: "./tasks.component.html",
   styleUrl: "./tasks.component.scss",
 })
-export class TasksComponent {
-  readonly tasks: Task[];
-  selected: number | null;
+export class TasksComponent implements OnInit {
+  taskService: TaskService = inject(TaskService);
+  tasks: Task[] = [];
+  selected: number | null = null;
 
-  constructor() {
-    this.tasks = TASKS;
-    this.selected = null;
+  ngOnInit(): void {
+    this.getTasks();
+  }
+
+  getTasks(): void {
+    this.taskService
+      .getTasks()
+      .subscribe(tasks => this.tasks = tasks);
   }
 
   onSelect(index: number | null): void {
