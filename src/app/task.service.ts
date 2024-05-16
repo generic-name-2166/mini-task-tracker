@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { TASKS, type Task } from './task';
-import { type Observable, of } from 'rxjs';
+import { Injectable } from "@angular/core";
+import { TASKS, type Task } from "./task";
+import { type Observable, of } from "rxjs";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class TaskService {
   getTasks(): Observable<Task[]> {
@@ -11,5 +11,5 @@ export class TaskService {
     return tasks;
   }
 
-  constructor() { }
+  constructor() {}
 }

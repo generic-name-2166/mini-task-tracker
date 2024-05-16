@@ -1,18 +1,76 @@
-export enum Status {
+enum Status {
   NotStarted,
   InProgress,
   InReview,
   Approved,
 }
 
+enum Priority {
+  High,
+  Medium,
+  Low,
+}
+
+interface Assignee {
+  name: string;
+}
+
 export interface Task {
+  id: number;
+  title: string;
   name: string;
   due: Date;
+  priority: Priority;
   status: Status;
+  assignees: Assignee[];
+}
+
+function getTask(
+  id: number,
+  title: string,
+  name: string,
+  due: Date,
+  priority: Priority,
+  status: Status,
+  assignees: Assignee[],
+): Task {
+  return {
+    id,
+    title,
+    name,
+    due,
+    priority,
+    status,
+    assignees,
+  } satisfies Task;
 }
 
 export const TASKS: Task[] = [
-  { name: "Task 1", due: new Date("2024-05-14"), status: Status.InProgress },
-  { name: "Task 2", due: new Date("2024-05-15"), status: Status.NotStarted },
-  { name: "Task 3", due: new Date("2024-05-16"), status: Status.NotStarted },
+  getTask(
+    0,
+    "Task 1",
+    "Task one",
+    new Date("2024-05-14"),
+    Priority.Low,
+    Status.InProgress,
+    [{ name: "me" }],
+  ),
+  getTask(
+    1,
+    "Task 2",
+    "Task two",
+    new Date("2024-05-15"),
+    Priority.High,
+    Status.NotStarted,
+    [{ name: "you" }],
+  ),
+  getTask(
+    2,
+    "Task 3",
+    "Task three",
+    new Date("2024-05-16"),
+    Priority.Medium,
+    Status.NotStarted,
+    [{ name: "them" }],
+  ),
 ];
