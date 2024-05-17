@@ -19,12 +19,12 @@ export class TaskService {
   }
 
   getTaskById(id: number): Observable<Task> | null {
-    const task: Task | undefined = TASKS.find((task) => task.id === id);
+    const task: Task | undefined = this.tasks.find((task) => task.id === id);
     return task ? of(task) : null;
   }
 
   getNewId(): number {
-    return TASKS.length;
+    return this.tasks.length;
   }
 
   save(): void {
