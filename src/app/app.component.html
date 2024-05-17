@@ -1,8 +1,17 @@
 <h1>{{ title }}</h1>
 
-<nav>
-  <a routerLink="/tasks">Dashboard</a>
-  <a routerLink="/new">Create new task</a>
+<nav mat-tab-nav-bar [tabPanel]="tabPanel" mat-stretch-tabs="true">
+  @for (link of links; track link) {
+    <a
+      mat-tab-link
+      [routerLink]="link.path"
+      routerLinkActive
+      #rla="routerLinkActive"
+      [active]="rla.isActive"
+      >{{ link.name }}</a
+    >
+  }
 </nav>
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
 
 <router-outlet />
