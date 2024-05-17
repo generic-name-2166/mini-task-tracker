@@ -70,4 +70,15 @@ export class TaskService {
     this.tasks = [...this.tasks, task];
     this.save();
   }
+
+  editTask(newTask: Task): void {
+    /* this.tasks = this.tasks.map(task => {
+      if (task.id !== id) {
+        return task;
+      }
+      return newTask;
+    }) */
+    this.tasks = this.tasks.map((task) => (task.id === newTask.id ? newTask : task));
+    this.save();
+  }
 }

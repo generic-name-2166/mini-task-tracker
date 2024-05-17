@@ -5,11 +5,34 @@ export enum Status {
   Approved,
 }
 
+export interface IStatus {
+  name: string;
+  value: Status;
+}
+
+export const STATUS: IStatus[] = [
+  { name: "Not started", value: Status.NotStarted },
+  { name: "In progress", value: Status.InProgress },
+  { name: "In review", value: Status.InReview },
+  { name: "Approved", value: Status.Approved },
+];
+
 export enum Priority {
   High,
   Medium,
   Low,
 }
+
+export interface IPriority {
+  name: string;
+  value: Priority;
+}
+
+export const PRIORITIES: IPriority[] = [
+  { name: "High", value: Priority.High },
+  { name: "Medium", value: Priority.Medium },
+  { name: "Low", value: Priority.Low },
+];
 
 interface Assignee {
   name: string;

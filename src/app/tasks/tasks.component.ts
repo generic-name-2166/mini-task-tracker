@@ -1,6 +1,7 @@
 import { Component, type OnInit, inject } from "@angular/core";
 import { Status, type Task } from "../task";
 import { MatTableModule, MatTextColumn } from "@angular/material/table";
+import { MatButtonModule } from "@angular/material/button";
 import { FormsModule } from "@angular/forms";
 import { TaskService } from "../task.service";
 import { RouterModule } from "@angular/router";
@@ -8,14 +9,20 @@ import { RouterModule } from "@angular/router";
 @Component({
   selector: "app-tasks",
   standalone: true,
-  imports: [MatTableModule, MatTextColumn, FormsModule, RouterModule],
+  imports: [
+    MatTableModule,
+    MatTextColumn,
+    MatButtonModule,
+    FormsModule,
+    RouterModule,
+  ],
   templateUrl: "./tasks.component.html",
   styleUrl: "./tasks.component.scss",
 })
 export class TasksComponent implements OnInit {
   taskService: TaskService = inject(TaskService);
   tasks: Task[] = [];
-  displayed: string[] = ["title", "assignee", "due", "status"];
+  displayed: string[] = ["title", "assignee", "due", "status", "edit"];
 
   ngOnInit(): void {
     this.getTasks();

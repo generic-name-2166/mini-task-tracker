@@ -1,1 +1,51 @@
 <h2>Editing task</h2>
+
+<form (submit)="submit()" ngNativeValidate>
+  <div>
+    <h3>Title</h3>
+    <p>{{ task.title }}</p>
+  </div>
+
+  <div>
+    <h3>Assignee</h3>
+    <p>{{ task.assignee.name }}</p>
+  </div>
+  
+  <mat-form-field>
+    <mat-label>Task name</mat-label>
+    <input matInput type="text" [(ngModel)]="task.name" name="name" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Choose a date</mat-label>
+    <input
+      matInput
+      [matDatepicker]="due"
+      [(ngModel)]="task.due"
+      name="due"
+    />
+    <mat-hint>MM/DD/YYYY</mat-hint>
+    <mat-datepicker-toggle matIconSuffix [for]="due"></mat-datepicker-toggle>
+    <mat-datepicker #due></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Priority</mat-label>
+    <mat-select [(ngModel)]="task.priority" name="priority">
+      @for (priority of priorities; track priority) {
+        <mat-option [value]="priority.value">{{ priority.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Status</mat-label>
+    <mat-select [(ngModel)]="task.status" name="status">
+      @for (status of statusValues; track status) {
+        <mat-option [value]="status.value">{{ status.name }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-flat-button color="primary" type="submit">Save</button>
+</form>
