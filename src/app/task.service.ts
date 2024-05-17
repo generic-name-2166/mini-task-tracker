@@ -11,5 +11,8 @@ export class TaskService {
     return tasks;
   }
 
-  constructor() {}
+  getTaskById(id: number): Observable<Task> | null {
+    const task: Task | undefined = TASKS.find(task => task.id === id);
+    return task ? of(task) : null;
+  }
 }

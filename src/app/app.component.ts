@@ -1,11 +1,11 @@
 import { Component } from "@angular/core";
-import { RouterOutlet } from "@angular/router";
+import { RouterModule, RouterOutlet } from "@angular/router";
 import { TasksComponent } from "./tasks/tasks.component";
 
 @Component({
   selector: "app-root",
   standalone: true,
-  imports: [TasksComponent, RouterOutlet],
+  imports: [TasksComponent, RouterOutlet, RouterModule],
   templateUrl: "./app.component.html",
   styleUrl: "./app.component.scss",
 })
