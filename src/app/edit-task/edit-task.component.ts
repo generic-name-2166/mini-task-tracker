@@ -1,16 +1,16 @@
-import { Component, type OnInit, inject } from '@angular/core';
-import { TaskService } from '../task.service';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Location } from '@angular/common';
-import { Observable } from 'rxjs';
-import type { Task } from '../task';
+import { Component, type OnInit, inject } from "@angular/core";
+import { TaskService } from "../task.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Location } from "@angular/common";
+import { Observable } from "rxjs";
+import type { Task } from "../task";
 
 @Component({
-  selector: 'app-edit-task',
+  selector: "app-edit-task",
   standalone: true,
   imports: [],
-  templateUrl: './edit-task.component.html',
-  styleUrl: './edit-task.component.scss'
+  templateUrl: "./edit-task.component.html",
+  styleUrl: "./edit-task.component.scss",
 })
 export class EditTaskComponent implements OnInit {
   route: ActivatedRoute = inject(ActivatedRoute);
@@ -31,7 +31,7 @@ export class EditTaskComponent implements OnInit {
       this.router.navigate(["/404"]);
       return;
     }
-    maybeTask.subscribe(task => this.task = task);
+    maybeTask.subscribe((task) => (this.task = task));
   }
 
   ngOnInit(): void {

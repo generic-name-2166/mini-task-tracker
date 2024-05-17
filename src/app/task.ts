@@ -1,11 +1,11 @@
-enum Status {
+export enum Status {
   NotStarted,
   InProgress,
   InReview,
   Approved,
 }
 
-enum Priority {
+export enum Priority {
   High,
   Medium,
   Low,
