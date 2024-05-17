@@ -10,7 +10,7 @@
       name="title"
     />
   </mat-form-field>
-  
+
   <mat-form-field>
     <mat-label>Task name</mat-label>
     <input matInput required type="text" [(ngModel)]="model.name" name="name" />
@@ -18,7 +18,13 @@
 
   <mat-form-field>
     <mat-label>Choose a date</mat-label>
-    <input matInput [matDatepicker]="due" required />
+    <input
+      matInput
+      [matDatepicker]="due"
+      required
+      [(ngModel)]="model.due"
+      name="due"
+    />
     <mat-hint>MM/DD/YYYY</mat-hint>
     <mat-datepicker-toggle matIconSuffix [for]="due"></mat-datepicker-toggle>
     <mat-datepicker #due></mat-datepicker>

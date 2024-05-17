@@ -22,7 +22,7 @@ export interface Task {
   due: Date;
   priority: Priority;
   status: Status;
-  assignees: Assignee[];
+  assignee: Assignee;
 }
 
 function getTask(
@@ -32,7 +32,7 @@ function getTask(
   due: Date,
   priority: Priority,
   status: Status,
-  assignees: Assignee[],
+  assignee: Assignee,
 ): Task {
   return {
     id,
@@ -41,7 +41,7 @@ function getTask(
     due,
     priority,
     status,
-    assignees,
+    assignee,
   } satisfies Task;
 }
 
@@ -53,7 +53,7 @@ export const TASKS: Task[] = [
     new Date("2024-05-14"),
     Priority.Low,
     Status.InProgress,
-    [{ name: "me" }],
+    { name: "me" },
   ),
   getTask(
     1,
@@ -62,7 +62,7 @@ export const TASKS: Task[] = [
     new Date("2024-05-15"),
     Priority.High,
     Status.NotStarted,
-    [{ name: "you" }],
+    { name: "you" },
   ),
   getTask(
     2,
@@ -71,6 +71,6 @@ export const TASKS: Task[] = [
     new Date("2024-05-16"),
     Priority.Medium,
     Status.NotStarted,
-    [{ name: "them" }],
+    { name: "them" },
   ),
 ];

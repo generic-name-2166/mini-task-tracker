@@ -6,11 +6,16 @@ import { Router } from "@angular/router";
 import { MatInputModule } from "@angular/material/input";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatSelectModule } from '@angular/material/select';
+import { MatSelectModule } from "@angular/material/select";
+import { type Moment } from "moment";
 
 interface IPriority {
   name: string;
   value: Priority;
+}
+
+interface NewTask extends Omit<Partial<Task>, "due"> {
+  due?: Moment;
 }
 
 @Component({
@@ -34,13 +39,13 @@ export class NewTaskComponent {
   ];
   taskService: TaskService = inject(TaskService);
   router: Router = inject(Router);
-  model: Partial<Task> = {};
+  model: NewTask = {};
 
   submit() {
     this.taskService.addTask(
       this.model.title ?? "",
       this.model.name ?? "",
-      this.model.due ? this.model.due : new Date(),
+      this.model.due ? this.model.due.toDate() : new Date(),
       this.model.priority ?? Priority.High,
     );
     this.router.navigate(["/tasks"]);

@@ -4,6 +4,10 @@ import { type Observable, of } from "rxjs";
 
 const TASKS_KEY: string = "tasks";
 
+interface LoadedTask extends Omit<Task, "due"> {
+  due: string;
+}
+
 @Injectable({
   providedIn: "root",
 })
@@ -39,7 +43,18 @@ export class TaskService {
       return null;
     }
     const maybeTasks: string | null = localStorage.getItem(TASKS_KEY);
-    return maybeTasks ? JSON.parse(maybeTasks) : maybeTasks;
+    if (!maybeTasks) {
+      return null;
+    }
+    const tasks: Task[] = JSON.parse(maybeTasks).map(
+      (task: LoadedTask): Task => {
+        return {
+          ...task,
+          due: new Date(task.due),
+        } satisfies Task;
+      },
+    );
+    return tasks;
   }
 
   addTask(title: string, name: string, due: Date, priority: Priority): void {
@@ -50,7 +65,7 @@ export class TaskService {
       due,
       priority,
       status: Status.NotStarted,
-      assignees: [],
+      assignee: { name: "TODO" },
     } satisfies Task;
     this.tasks = [...this.tasks, task];
     this.save();
