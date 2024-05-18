@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
-import { ASSIGNEES, type IAssignee } from './task';
+import { Injectable } from "@angular/core";
+import { ASSIGNEES, type IAssignee } from "./task";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class AssigneeService {
   assignees: IAssignee[] = ASSIGNEES;

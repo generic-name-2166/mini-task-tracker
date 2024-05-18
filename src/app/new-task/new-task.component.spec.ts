@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
 
 import { NewTaskComponent } from "./new-task.component";
+import { provideMomentDateAdapter } from "@angular/material-moment-adapter";
 
 describe("NewTaskComponent", () => {
   let component: NewTaskComponent;
@@ -9,6 +10,7 @@ describe("NewTaskComponent", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [NewTaskComponent],
+      providers: [provideMomentDateAdapter()],
     }).compileComponents();
 
     fixture = TestBed.createComponent(NewTaskComponent);
