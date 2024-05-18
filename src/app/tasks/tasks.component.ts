@@ -101,14 +101,12 @@ export class TasksComponent implements OnInit {
   }
 
   getTasks(): void {
-    this.taskService
-      .getTasks()
-      .subscribe((tasks) => {
-        this.tasks = new MatTableDataSource(tasks);
-        this.tasks.sort = this.sort;
-        this.tasks.sortingDataAccessor = sortData;
-        this.tasks.filterPredicate = filterData;
-      });
+    this.taskService.getTasks().subscribe((tasks) => {
+      this.tasks = new MatTableDataSource(tasks);
+      this.tasks.sort = this.sort;
+      this.tasks.sortingDataAccessor = sortData;
+      this.tasks.filterPredicate = filterData;
+    });
   }
 
   displayStatus(status: Status): string {
@@ -135,7 +133,8 @@ export class TasksComponent implements OnInit {
       this.tasks.filter = "Assignee " + this.filterAssignee;
       return;
     } else if (this.filterDate) {
-      this.tasks.filter = "Date " + this.filterDate.toDate().toLocaleDateString("en-GB");
+      this.tasks.filter =
+        "Date " + this.filterDate.toDate().toLocaleDateString("en-GB");
       return;
     }
     this.tasks.filter = "";

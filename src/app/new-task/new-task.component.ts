@@ -7,7 +7,8 @@ import { MatInputModule } from "@angular/material/input";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from "@angular/material/select";
-import { type Moment } from "moment";
+import { MatButtonModule } from "@angular/material/button";
+import type { Moment } from "moment";
 
 interface NewTask extends Omit<Partial<Task>, "due"> {
   due?: Moment;
@@ -22,6 +23,7 @@ interface NewTask extends Omit<Partial<Task>, "due"> {
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
+    MatButtonModule,
   ],
   templateUrl: "./new-task.component.html",
   styleUrl: "./new-task.component.scss",
