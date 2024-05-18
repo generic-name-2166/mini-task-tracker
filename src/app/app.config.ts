@@ -6,6 +6,7 @@ import { provideClientHydration } from "@angular/platform-browser";
 import { provideAnimationsAsync } from "@angular/platform-browser/animations/async";
 import { provideMomentDateAdapter } from "@angular/material-moment-adapter";
 import { MAT_DATE_LOCALE } from "@angular/material/core";
+import { provideStore } from '@ngrx/store';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,5 +15,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     { provide: MAT_DATE_LOCALE, useValue: "en-GB" },
     provideMomentDateAdapter(),
-  ],
+    provideStore()
+],
 };

@@ -19,6 +19,7 @@ import {
 import { MatButtonModule } from "@angular/material/button";
 import { MatSelectModule } from "@angular/material/select";
 import moment, { type Moment } from "moment";
+import { AssigneeService } from "../assignee.service";
 
 interface NewTask extends Omit<Task, "due"> {
   due?: Moment;
@@ -52,13 +53,14 @@ export class EditTaskComponent implements OnInit {
   taskService: TaskService = inject(TaskService);
   location: Location = inject(Location);
   router: Router = inject(Router);
+  assigneeService: AssigneeService = inject(AssigneeService);
   task: NewTask = {
     id: NaN,
     title: "",
     name: "",
     status: Status.NotStarted,
     priority: Priority.High,
-    assignee: { name: "" },
+    assignee: this.assigneeService.getCurrent(),
   };
 
   goBack(): void {

@@ -1,6 +1,7 @@
-import { Injectable } from "@angular/core";
+import { Injectable, inject } from "@angular/core";
 import { TASKS, type Task, Priority, Status } from "./task";
 import { type Observable, of } from "rxjs";
+import { AssigneeService } from "./assignee.service";
 
 const TASKS_KEY: string = "tasks";
 
@@ -13,6 +14,7 @@ interface LoadedTask extends Omit<Task, "due"> {
 })
 export class TaskService {
   tasks: Task[] = this.load() ?? TASKS;
+  assigneeService: AssigneeService = inject(AssigneeService);
 
   getTasks(): Observable<Task[]> {
     return of(this.tasks);
@@ -65,19 +67,13 @@ export class TaskService {
       due,
       priority,
       status: Status.NotStarted,
-      assignee: { name: "TODO" },
+      assignee: this.assigneeService.getCurrent(),
     } satisfies Task;
     this.tasks = [...this.tasks, task];
     this.save();
   }
 
   editTask(newTask: Task): void {
-    /* this.tasks = this.tasks.map(task => {
-      if (task.id !== id) {
-        return task;
-      }
-      return newTask;
-    }) */
     this.tasks = this.tasks.map((task) =>
       task.id === newTask.id ? newTask : task,
     );

@@ -34,9 +34,17 @@ export const PRIORITIES: IPriority[] = [
   { name: "Low", value: Priority.Low },
 ];
 
-export interface Assignee {
+export interface IAssignee {
+  id: number;
   name: string;
 }
+
+export const ASSIGNEES: IAssignee[] = [
+  { name: "me", id: 0 },
+  { name: "you", id: 1 },
+  { name: "them", id: 2 },
+  { name: "TODO", id: 3 },
+]
 
 export interface Task {
   id: number;
@@ -45,7 +53,7 @@ export interface Task {
   due: Date;
   priority: Priority;
   status: Status;
-  assignee: Assignee;
+  assignee: IAssignee;
 }
 
 function getTask(
@@ -55,7 +63,7 @@ function getTask(
   due: Date,
   priority: Priority,
   status: Status,
-  assignee: Assignee,
+  assignee:IAssignee,
 ): Task {
   return {
     id,
@@ -76,7 +84,7 @@ export const TASKS: Task[] = [
     new Date("2024-05-14"),
     Priority.Low,
     Status.InProgress,
-    { name: "me" },
+    { name: "me", id: 0, },
   ),
   getTask(
     1,
@@ -85,7 +93,7 @@ export const TASKS: Task[] = [
     new Date("2024-05-15"),
     Priority.High,
     Status.NotStarted,
-    { name: "you" },
+    { name: "you", id: 1, },
   ),
   getTask(
     2,
@@ -94,6 +102,6 @@ export const TASKS: Task[] = [
     new Date("2024-05-16"),
     Priority.Medium,
     Status.NotStarted,
-    { name: "them" },
+    { name: "them", id: 2, },
   ),
 ];
