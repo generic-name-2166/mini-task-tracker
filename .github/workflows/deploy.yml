@@ -27,7 +27,7 @@ jobs:
           BASE_PATH: "/mini-task-tracker"
         run: |
           bun run build
-          touch .output/public/.nojekyll
+          touch dist/mini-task-tracker/browser/.nojekyll
 
       - name: Upload Artifacts
         uses: actions/upload-pages-artifact@v3
