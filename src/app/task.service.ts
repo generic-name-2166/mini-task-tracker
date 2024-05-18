@@ -78,7 +78,9 @@ export class TaskService {
       }
       return newTask;
     }) */
-    this.tasks = this.tasks.map((task) => (task.id === newTask.id ? newTask : task));
+    this.tasks = this.tasks.map((task) =>
+      task.id === newTask.id ? newTask : task,
+    );
     this.save();
   }
 }

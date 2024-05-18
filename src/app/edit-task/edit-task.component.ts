@@ -7,7 +7,15 @@ import { FormsModule } from "@angular/forms";
 import { MatInputModule } from "@angular/material/input";
 import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatFormFieldModule } from "@angular/material/form-field";
-import { PRIORITIES, type IPriority, type Task, type IStatus, STATUS, Priority, Status } from "../task";
+import {
+  PRIORITIES,
+  type IPriority,
+  type Task,
+  type IStatus,
+  STATUS,
+  Priority,
+  Status,
+} from "../task";
 import { MatButtonModule } from "@angular/material/button";
 import { MatSelectModule } from "@angular/material/select";
 import moment, { type Moment } from "moment";

@@ -34,7 +34,7 @@ export const PRIORITIES: IPriority[] = [
   { name: "Low", value: Priority.Low },
 ];
 
-interface Assignee {
+export interface Assignee {
   name: string;
 }
 
