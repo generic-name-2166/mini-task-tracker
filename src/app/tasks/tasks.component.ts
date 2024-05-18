@@ -10,6 +10,7 @@ import { MatInputModule } from "@angular/material/input";
 import { FormsModule } from "@angular/forms";
 import { MatFormFieldModule } from "@angular/material/form-field";
 import { MatSelectModule } from "@angular/material/select";
+import { MatDatepickerModule } from "@angular/material/datepicker";
 import { MatSort, MatSortModule } from "@angular/material/sort";
 import { TaskService } from "../task.service";
 import { RouterModule } from "@angular/router";
@@ -57,7 +58,11 @@ function filterData(task: Task, filter: string): boolean {
     const f: string = filter.slice(9).toLowerCase();
     const assignee: string = task.assignee.name.toLowerCase();
     const result: boolean = assignee.includes(f);
-    console.log(result);
+    return result;
+  } else if (filter.startsWith("Date ")) {
+    const f: string = filter.slice(5);
+    const date: string = task.due.toLocaleDateString("en-GB");
+    const result: boolean = f === date;
     return result;
   }
   return true;
@@ -76,6 +81,7 @@ function filterData(task: Task, filter: string): boolean {
     MatInputModule,
     MatFormFieldModule,
     MatSelectModule,
+    MatDatepickerModule,
   ],
   templateUrl: "./tasks.component.html",
   styleUrl: "./tasks.component.scss",
@@ -92,15 +98,17 @@ export class TasksComponent implements OnInit {
 
   ngOnInit(): void {
     this.getTasks();
-    this.tasks.sort = this.sort;
-    this.tasks.sortingDataAccessor = sortData;
-    this.tasks.filterPredicate = filterData;
   }
 
   getTasks(): void {
     this.taskService
       .getTasks()
-      .subscribe((tasks) => (this.tasks = new MatTableDataSource(tasks)));
+      .subscribe((tasks) => {
+        this.tasks = new MatTableDataSource(tasks);
+        this.tasks.sort = this.sort;
+        this.tasks.sortingDataAccessor = sortData;
+        this.tasks.filterPredicate = filterData;
+      });
   }
 
   displayStatus(status: Status): string {
@@ -125,7 +133,18 @@ export class TasksComponent implements OnInit {
       }
     } else if (this.filterAssignee) {
       this.tasks.filter = "Assignee " + this.filterAssignee;
+      return;
+    } else if (this.filterDate) {
+      this.tasks.filter = "Date " + this.filterDate.toDate().toLocaleDateString("en-GB");
+      return;
     }
     this.tasks.filter = "";
+  }
+
+  resetFilter(): void {
+    this.filterAssignee = undefined;
+    this.filterDate = undefined;
+    this.filterStatus = undefined;
+    this.applyFitler();
   }
 }
